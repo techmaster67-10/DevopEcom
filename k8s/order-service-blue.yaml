@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: order-service
-        image: ghcr.io/your-github-user/ecommerce-order-service:latest
+        image: ghcr.io/techmaster67-10/ecommerce-order-service:latest
         ports: [{containerPort: 3003}]
         env:
         - {name: PORT, value: "3003"}

@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: customer-service
-        image: ghcr.io/your-github-user/ecommerce-customer-service:latest
+        image: ghcr.io/techmaster67-10/ecommerce-customer-service:latest
         ports: [{containerPort: 3002}]
         env: [{name: PORT, value: "3002"}]
         readinessProbe: {httpGet: {path: /health, port: 3002}, initialDelaySeconds: 5, periodSeconds: 10}

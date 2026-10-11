@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: ghcr.io/your-github-user/ecommerce-frontend:latest
+        image: ghcr.io/techmaster67-10/ecommerce-frontend:latest
         ports: [{containerPort: 80}]
 ---
 apiVersion: v1
