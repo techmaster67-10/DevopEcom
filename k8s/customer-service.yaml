@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-service
+  namespace: ecommerce
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: customer-service}}
+  template:
+    metadata: {labels: {app: customer-service}}
+    spec:
+      containers:
+      - name: customer-service
+        image: ghcr.io/your-github-user/ecommerce-customer-service:latest
+        ports: [{containerPort: 3002}]
+        env: [{name: PORT, value: "3002"}]
+        readinessProbe: {httpGet: {path: /health, port: 3002}, initialDelaySeconds: 5, periodSeconds: 10}
+        livenessProbe: {httpGet: {path: /health, port: 3002}, initialDelaySeconds: 10, periodSeconds: 20}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: customer-service, namespace: ecommerce}
+spec:
+  selector: {app: customer-service}
+  ports: [{port: 3002, targetPort: 3002}]

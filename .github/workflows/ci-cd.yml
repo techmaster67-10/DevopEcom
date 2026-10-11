@@ -1,0 +1,70 @@
+name: CI-CD
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+permissions:
+  contents: read
+  packages: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [product-service, customer-service, order-service]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: services/${{ matrix.service }}/package.json
+      - name: Install
+        working-directory: services/${{ matrix.service }}
+        run: npm install
+      - name: Test
+        working-directory: services/${{ matrix.service }}
+        run: npm test
+      - name: Audit
+        working-directory: services/${{ matrix.service }}
+        run: npm audit --audit-level=high
+  docker-security:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    strategy:
+      matrix:
+        include:
+          - name: product-service
+            path: services/product-service
+          - name: customer-service
+            path: services/customer-service
+          - name: order-service
+            path: services/order-service
+          - name: frontend
+            path: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t ${{ matrix.name }}:${{ github.sha }} ${{ matrix.path }}
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ matrix.name }}:${{ github.sha }}
+          format: table
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: CRITICAL,HIGH
+      - name: Login to GHCR
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push image
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker tag ${{ matrix.name }}:${{ github.sha }} ghcr.io/${{ github.repository_owner }}/ecommerce-${{ matrix.name }}:latest
+          docker push ghcr.io/${{ github.repository_owner }}/ecommerce-${{ matrix.name }}:latest

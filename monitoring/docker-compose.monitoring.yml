@@ -1,0 +1,14 @@
+# Start the main app first:  docker compose up --build -d   (from the project root)
+# Then start monitoring:     docker compose -f docker-compose.monitoring.yml up -d
+services:
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports: ["9090:9090"]
+    networks: [devshop]
+
+networks:
+  devshop:
+    external: true
+    name: devshop_default

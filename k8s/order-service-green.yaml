@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service-green
+  namespace: ecommerce
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: order-service, version: green}}
+  template:
+    metadata: {labels: {app: order-service, version: green}}
+    spec:
+      containers:
+      - name: order-service
+        image: ghcr.io/your-github-user/ecommerce-order-service:latest
+        ports: [{containerPort: 3003}]
+        env:
+        - {name: PORT, value: "3003"}
+        - {name: PRODUCT_SERVICE_URL, value: "http://product-service:3001"}
+        - {name: CUSTOMER_SERVICE_URL, value: "http://customer-service:3002"}
+        readinessProbe: {httpGet: {path: /health, port: 3003}, initialDelaySeconds: 5, periodSeconds: 10}

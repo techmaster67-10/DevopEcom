@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevShop | Status</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="brand"><h1>DevShop</h1><p>Microservices E-Commerce</p></div>
+  <nav><a href="index.html">Shop</a><a href="orders.html">Orders</a><a href="admin.html">Admin</a><a href="status.html">Status</a></nav>
+</header>
+<main>
+  <section class="hero"><h2>Service Status</h2><p>Live health checks for each microservice. Refreshes every 10 seconds.</p></section>
+  <section id="services" class="grid"></section>
+  <p class="msg" id="checked"></p>
+  <button id="refresh" type="button" class="inline">Check now</button>
+</main>
+<script src="common.js"></script>
+<script src="status.js"></script>
+</body>
+</html>

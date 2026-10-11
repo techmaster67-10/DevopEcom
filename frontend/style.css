@@ -1,0 +1,24 @@
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}header{padding:24px 7%;background:#14213d;color:white;display:flex;justify-content:space-between;align-items:center}h1,h2,p{margin-top:0}.badge{background:#fca311;color:#14213d;padding:8px 12px;border-radius:20px;font-weight:bold}main{max-width:1100px;margin:auto;padding:30px 20px}.hero{margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card,.panel{background:white;padding:20px;border-radius:14px;box-shadow:0 5px 20px #00000012}.card h3{margin:10px 0}.price{font-size:22px;font-weight:bold}.panel{margin-top:25px}form{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;align-items:end}label{display:flex;flex-direction:column;gap:7px;font-weight:bold}input,select,button{padding:11px;border:1px solid #ccd3df;border-radius:8px;font-size:15px}button{background:#14213d;color:#fff;cursor:pointer;border:0;font-weight:bold}.order{padding:12px 0;border-bottom:1px solid #eee}#message{margin-top:15px;font-weight:bold}
+
+/* ---- navigation & shared additions ---- */
+header{flex-wrap:wrap;gap:14px}
+header h1{margin-bottom:2px}header p{margin-bottom:0;opacity:.8}
+nav{display:flex;gap:6px;flex-wrap:wrap}
+nav a{color:#fff;text-decoration:none;padding:8px 14px;border-radius:20px;font-weight:bold}
+nav a:hover{background:#ffffff22}
+nav a.active{background:#fca311;color:#14213d}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #fca311;outline-offset:2px}
+.msg{margin-top:15px;font-weight:bold}.msg.ok{color:#1a7f37}.msg.err{color:#c62828}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;align-items:start}
+.two-col .panel{margin-top:0}
+form.stack{display:flex;flex-direction:column;gap:14px}
+.table-wrap{overflow-x:auto;margin-top:18px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #eee;white-space:nowrap}
+th{background:#f4f7fb;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+td.empty{text-align:center;color:#667;padding:24px}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap}.toolbar input{flex:1;min-width:220px}
+.stats{margin-bottom:5px}.stats .price{margin-bottom:0}
+.pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+.pill.up{background:#dcf5e3;color:#1a7f37}.pill.down{background:#fde2e2;color:#c62828}
+button.inline{margin-top:10px}

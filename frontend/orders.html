@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DevShop | Orders</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <div class="brand"><h1>DevShop</h1><p>Microservices E-Commerce</p></div>
+  <nav><a href="index.html">Shop</a><a href="orders.html">Orders</a><a href="admin.html">Admin</a><a href="status.html">Status</a></nav>
+</header>
+<main>
+  <section class="hero"><h2>Order History</h2><p>All orders stored by the Order Service.</p></section>
+  <section class="grid stats">
+    <article class="card"><small>Total orders</small><p class="price" id="statCount">–</p></article>
+    <article class="card"><small>Total revenue</small><p class="price" id="statRevenue">–</p></article>
+    <article class="card"><small>Items sold</small><p class="price" id="statItems">–</p></article>
+  </section>
+  <section class="panel">
+    <div class="toolbar">
+      <input id="filter" type="search" placeholder="Search by customer, product or order ID" aria-label="Search orders">
+      <button id="refresh" type="button">Refresh</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Order</th><th>Customer</th><th>Product</th><th>Qty</th><th>Unit price</th><th>Total</th><th>Status</th><th>Placed</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <p id="message" class="msg"></p>
+  </section>
+</main>
+<script src="common.js"></script>
+<script src="orders.js"></script>
+</body>
+</html>

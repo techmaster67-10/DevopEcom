@@ -1,0 +1,33 @@
+name: devshop
+
+services:
+  product-service:
+    build: ./services/product-service
+    environment:
+      PORT: 3001
+    ports: ["3001:3001"]
+
+  customer-service:
+    build: ./services/customer-service
+    environment:
+      PORT: 3002
+    ports: ["3002:3002"]
+
+  order-service:
+    build: ./services/order-service
+    environment:
+      PORT: 3003
+      PRODUCT_SERVICE_URL: http://product-service:3001
+      CUSTOMER_SERVICE_URL: http://customer-service:3002
+    depends_on:
+      - product-service
+      - customer-service
+    ports: ["3003:3003"]
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - product-service
+      - customer-service
+      - order-service
+    ports: ["8080:80"]
