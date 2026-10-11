@@ -128,3 +128,5 @@ hotfix/* -> main + develop
 ```
 
 See `docs/DEVOPS-GUIDE.md` for the viva/demo checklist.
+
+Feature branch workflow demonstrated with a pull request.
