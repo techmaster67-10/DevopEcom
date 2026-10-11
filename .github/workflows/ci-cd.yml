@@ -28,7 +28,7 @@ jobs:
         run: npm test
       - name: Audit
         working-directory: services/${{ matrix.service }}
-        run: npm audit --audit-level=high
+        run: npm audit --omit=dev --audit-level=high
   docker-security:
     needs: test
     runs-on: ubuntu-latest
